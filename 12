@@ -1,0 +1,26 @@
+#include<cstdio>
+int x[11]; 
+int swap(int &x, int &y)
+{
+	int temp = x;
+	x = y;
+	y = temp;
+}
+int main()
+{
+  for (int i = 0; i < 10; i ++)
+  {
+  	scanf("%d", x[i]);
+  }
+  for (int i = 0; i < 10; i ++)
+  	for (int j = 0; j < i; j ++)
+  	{
+  		if (x[j] > x[i])
+  		swap(x[i],x[j]);
+	}
+	for (int i = 0; i < 10; i ++)
+  {
+  	printf("%d", x[i]);
+  }
+  return 0;
+}
