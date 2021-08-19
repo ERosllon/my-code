@@ -1,0 +1,69 @@
+#include<cstdio>
+#include<cstring>
+#include<stack>
+stack<char>s1, s2;
+char c[1001];
+int len;
+int x, y;
+int pri(char x)
+{
+  if (x == '+' || x == '-')
+  {
+	  return 0;
+  }
+  if (x == '*' || x == '/')
+  {
+	  return 1;
+  }
+  if (x == ')')
+  {
+  	return 2;
+  }
+  return 3;
+}
+void ope(int x, int y, char z)
+{
+	switch(z)
+  	{
+  		case '+':
+  			s1.push(x + y);
+  			break;
+  		case '-':
+  			s1.push(y - x);
+  			break;
+  		case '*':
+  			s1.push(y * x);
+  			break;
+  		case '/':
+  			s1.push(y / x);
+  			break;
+	}
+}
+int main()
+{
+  scanf ("%s", c);
+  len = strlen(c);
+  for (int i = 0; i < len; i ++)
+  {
+  	if (c[i] >= '0' && c[i] <= 9)
+  	s1.push(c[i]);
+  	else
+  	{
+  		if (s1.empty())
+  		s2.push(c[i]);
+  		int temp = pri(c[i]);
+  		if (temp == 2)
+  		{
+  			while (s2.top() != '(')
+  			{
+  				x = s1.top();
+  				s1.pop();
+  				y = s1.top();
+  				s1.pop();
+  				ope(x, y, s2.top());
+  				s2.pop();
+			}
+		}
+		
+	}
+  }
