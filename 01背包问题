@@ -1,0 +1,44 @@
+#include<cstdio> //01背包二维 
+#include<algorithm>
+const int MAXN = 105;
+int m, n, w[MAXN], c[MAXN];
+int f[MAXN][MAXN];
+int max(int x, int y)//编译器问题使algorithm内没有此函数，可省略 
+{
+  if (x >= y) return x;
+  return y;
+}
+int main()
+{
+  scanf ("%d%d", &m, &n);//m为物品种类数量，n为背包容量 
+  for (int i = 1; i <= m; ++ i) scanf ("%d%d", &w[i], &c[i]);//w为物品体积，c为价值 
+  for (int i = 1; i <= m; ++ i)//枚举种类 
+    for (int j = 0; j <= n; ++ j)//枚举背包容量，为最终值的计算存储前驱 
+      if (j >= w[i]) f[i][j] = max(f[i - 1][j], f[i - 1][j - w[i]] + c[i]);//装得进的情况 
+      else f[i][j] = f[i - 1][j];//装不进的情况 
+  printf ("%d", f[m][n]);//输出数据 
+  return 0;
+}
+
+
+
+#include<cstdio>//01背包一维 
+#include<algorithm>
+const int MAXN = 105;
+int m, n, w[MAXN], c[MAXN];
+int f[MAXN];
+int max(int x, int y)//编译器问题使algorithm内没有此函数，可省略 
+{
+  if (x >= y) return x;
+  return y;
+}
+int main()
+{
+  scanf ("%d%d", &m, &n);//m为物品种类数量，n为背包容量 
+  for (int i = 1; i <= m; ++ i) scanf ("%d%d", &w[i], &c[i]);//w为物品体积，c为价值 
+  for (int i = 1; i <= m; ++ i)//枚举种类 
+    for (int j = n; j >= w[i]; -- j)//枚举背包容量，为最终值的计算存储前驱，逆序枚举防止数据重复计算，枚举至w[i]可减少时间 
+      f[j] = max(f[j], f[j - w[i]] + c[i]);//输入数据必定小于n,因此不需要考虑放不进的情况 
+  printf ("%d", f[n]);//输出数据 
+  return 0;
+}
