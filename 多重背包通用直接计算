@@ -11,7 +11,7 @@ int max(int x, int y)//编译器问题使algorithm内没有此函数，可省略
 int main()
 {
   scanf ("%d%d", &m, &n);//m为物品种类数量，n为背包容量
-  for (int i = 1; i <= m; ++ i) scanf ("%d%d%d", &w[i], &c[i], &s[i]);//w为物品体积，c为价值 
+  for (int i = 1; i <= m; ++ i) scanf ("%d%d%d", &w[i], &c[i], &s[i]);//w为物品体积，c为价值，s为拥有的该物品数量
   for (int i = 1; i <= m; ++ i)//枚举物品 
     for (int j = 0; j <= n; ++j)//枚举容积 
       for (int k = 0; k <= s[i]; ++ k)//枚举装的数量，从零开始，使第一个if判断的值为真
