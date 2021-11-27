@@ -36,7 +36,7 @@ int main()
 {
   scanf ("%d%d", &m, &n);//m为物品种类数量，n为背包容量 
   for (int i = 1; i <= m; ++ i) scanf ("%d%d", &w[i], &c[i]);//w为物品体积，c为价值 
-  for (int i = 1; i <= m; ++ i)//枚举种类 
+  for (int i = 1; i <= n; ++ i)//枚举种类 
     for (int j = n; j >= w[i]; -- j)//枚举背包容量，为最终值的计算存储前驱，逆序枚举防止数据重复计算，枚举至w[i]可减少时间 
       f[j] = max(f[j], f[j - w[i]] + c[i]);//输入数据必定小于n,因此不需要考虑放不进的情况 
   printf ("%d", f[n]);//输出数据 
