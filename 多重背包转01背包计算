@@ -1,0 +1,21 @@
+#include<cstdio> //多重背包转01背包计算 
+#include<algorithm>
+const int MAXN = 105;
+int m, n, w[MAXN], c[MAXN], s[MAXN];
+int f[MAXN];
+int max(int x, int y)//编译器问题使algorithm内没有此函数，可省略 
+{
+  if (x >= y) return x;
+  return y;
+}
+int main()
+{
+  scanf ("%d%d", &m, &n);//m为物品种类数量，n为背包容量 
+  for (int i = 1; i <= m; ++ i) scanf ("%d%d%d", &w[i], &c[i], &s[i]);//w为物品体积，c为价值,s为拥有的当前物品的数量 
+  for (int i = 1; i <= m; ++ i)//枚举物品 
+    for (int k = 1; k <= s[i]; ++ k)//拆分数量，拆成每个数量为一的物品 
+	  for (int j = n; j >= w[i]; -- j)//枚举容积 
+	    f[j] = max (f[j], f[j - w[i]] + c[i]);//每个数量为一的物品做一次01背包
+  printf ("%d", f[n]);//输出数据 
+  return 0;
+}
