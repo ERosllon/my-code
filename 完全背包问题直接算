@@ -1,4 +1,4 @@
-#include<cstdio> //01背包二维 
+#include<cstdio> //完全背包转01背包计算
 #include<algorithm>
 const int MAXN = 105;
 int m, n, w[MAXN], c[MAXN];
